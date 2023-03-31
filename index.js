@@ -1,4 +1,4 @@
-function submitData(name, email) {
+/*function submitData(name, email) {
     let formData = {
         name: name,
         email: email
@@ -6,6 +6,7 @@ function submitData(name, email) {
 
     // method: "POST" 
     const configurationObject = {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -13,15 +14,15 @@ function submitData(name, email) {
         body: JSON.stringify(formData),
     };
 
-    fetch("http://localhost:3000/users", configurationObject)
+    return fetch("http://localhost:3000/users", configurationObject)
         .then(function (response) {
             return response.json();
         })
         .then(function (object) {
             let h2 = document.createElement("h2");
-            h2.innerHTML = obj.id;
+            h2.innerHTML = object.id;
             document.body.appendChild(h2);
-            console.log(obj);
+            console.log(object);
         })
         .catch(function (error) {
             alert("Unauthorized Access");
@@ -31,4 +32,31 @@ function submitData(name, email) {
             console.log(error.message);
 
         });
+}*/
+
+function submitData( name, email ) {
+    const configurationObject = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({
+            name: `${name}`,
+            email: `${email}`,
+        }),
+    };
+
+    return fetch('http://localhost:3000/users', configurationObject)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (object) {
+            document.write(object.id);
+        })
+        .catch(function (error) {
+            alert("Bad things! Ragnarők!");
+            document.write(error.message);
+            console.log(error.message);
+        });;
 }
